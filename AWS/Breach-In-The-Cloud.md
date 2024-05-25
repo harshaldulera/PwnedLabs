@@ -12,7 +12,7 @@ We have been given the following AWS Credentials at the start.
 
 Let's Configure our `aws-cli` using these credentials.
 
-```terminal
+```
 ┌──(kali㉿kali)-[~/Desktop/pwnedlabs/BreachInTheCloud]
 └─$ aws sts get-caller-identity | jq
 {
@@ -44,3 +44,45 @@ us-east-1 => Region
 20230826T2035Z => Timestamp
 PjmwM7E4hZ6897Aq => Random Identifier
 ```
+
+On analyzing the first file, all the activities we're realated to root only one of them was for the following `temp-user` to which we have access.
+
+```json
+{
+      "eventVersion": "1.08",
+      "userIdentity": {
+        "type": "IAMUser",
+        "principalId": "AIDARSCCN4A3X2YWZ37ZI",
+        "arn": "arn:aws:iam::107513503799:user/temp-user",
+        "accountId": "107513503799",
+        "accessKeyId": "AKIARSCCN4A3WD4RO4P4",
+        "userName": "temp-user"
+      },
+      "eventTime": "2023-08-26T20:29:37Z",
+      "eventSource": "sts.amazonaws.com",
+      "eventName": "GetCallerIdentity",
+      "awsRegion": "us-east-1",
+      "sourceIPAddress": "84.32.71.19",
+      "userAgent": "aws-cli/1.27.74 Python/3.10.6 Linux/5.15.90.1-microsoft-standard-WSL2 botocore/1.29.74",
+      "requestParameters": null,
+      "responseElements": null,
+      "requestID": "3db296ab-c531-4b4a-a468-e1b05ec83246",
+      "eventID": "ea6ae4b8-aae8-4fca-a495-2df427bdce46",
+      "readOnly": true,
+      "eventType": "AwsApiCall",
+      "managementEvent": true,
+      "recipientAccountId": "107513503799",
+      "eventCategory": "Management",
+      "tlsDetails": {
+        "tlsVersion": "TLSv1.2",
+        "cipherSuite": "ECDHE-RSA-AES128-GCM-SHA256",
+        "clientProvidedHostHeader": "sts.amazonaws.com"
+      }
+    }
+```
+
+It just calls the `GetCallerIdentity` API.
+  
+In the next file the `temp-user` tried to list objects inside the `emergency-data-recovery` s3 bucket and recieved an access denied error.
+
+<figure><img src="../src/Breach-In-The-Cloud/1.png" alt="Access Denied on listing the s3 bucket."></figure>
