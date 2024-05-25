@@ -45,7 +45,9 @@ us-east-1 => Region
 PjmwM7E4hZ6897Aq => Random Identifier
 ```
 
-On analyzing the first file, all the activities we're realated to root only one of them was for the following `temp-user` to which we have access.
+## File 1
+
+On analyzing the first file `107513503799_CloudTrail_us-east-1_20230826T2035Z_PjmwM7E4hZ6897Aq.json`, all the activities we're realated to root only one of them was for the following `temp-user` to which we have access.
 
 ```json
 {
@@ -82,7 +84,15 @@ On analyzing the first file, all the activities we're realated to root only one 
 ```
 
 It just calls the `GetCallerIdentity` API.
+
+## File 2
   
-In the next file the `temp-user` tried to list objects inside the `emergency-data-recovery` s3 bucket and recieved an access denied error.
+In the next file `107513503799_CloudTrail_us-east-1_20230826T2040Z_UkDeakooXR09uCBm.json` the `temp-user` tried to list objects inside the `emergency-data-recovery` s3 bucket and recieved an access denied error.
 
 <figure><img src="../src/Breach-In-The-Cloud/1.png" alt="Access Denied on listing the s3 bucket."></figure>
+
+## File 3
+
+The third file `107513503799_CloudTrail_us-east-1_20230826T2050Z_iUtQqYPskB20yZqT.json` was a bunch of error messages made by the temp-user and recieved `Access-Denied`
+
+<figure><img src="../src/Breach-In-The-Cloud/2.png" alt="Error messages on API Calls"></figure>
