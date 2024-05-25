@@ -96,3 +96,13 @@ In the next file `107513503799_CloudTrail_us-east-1_20230826T2040Z_UkDeakooXR09u
 The third file `107513503799_CloudTrail_us-east-1_20230826T2050Z_iUtQqYPskB20yZqT.json` was a bunch of error messages made by the temp-user and recieved `Access-Denied`
 
 <figure><img src="../src/Breach-In-The-Cloud/2.png" alt="Error messages on API Calls"></figure>
+
+## File 4
+
+The fourth file `107513503799_CloudTrail_us-east-1_20230826T2055Z_W0F5uypAbGttUgSn.json` is also a bunch of error messages.
+
+<figure><img src="../src/Breach-In-The-Cloud/3.png" alt="Error messages log file"></figure>
+
+## File 5
+
+In the third file `107513503799_CloudTrail_us-east-1_20230826T2100Z_APB7fBUnHmiWjHtg.json`
