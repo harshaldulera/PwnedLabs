@@ -1,0 +1,46 @@
+# Breach In The Cloud Writeup
+This Challenge gives us a scenario where we have been alerted to a potential security threat. The Huge Logistics security team have provided you with AWS keys of an account that saw unusual activity, as well as AWS CloudTrail logs around the time of the activity. We need your expertise to confirm the breach by analyzing our CloudTrail logs, identifying the compromised AWS service and any data that was exfiltrated.
+
+AWS CloudTrail is a service that enables governance, compliance, operational auditing, and risk auditing of AWS account.
+
+<hr/>
+
+Lets' Start with the Challenge.
+
+We have been given the following AWS Credentials at the start.
+<figure><img src="../src/Breach-In-The-Cloud/start.png" alt="Exposed information while starting the challenge"></figure>
+
+Let's Configure our `aws-cli` using these credentials.
+
+```terminal
+┌──(kali㉿kali)-[~/Desktop/pwnedlabs/BreachInTheCloud]
+└─$ aws sts get-caller-identity | jq
+{
+  "UserId": "AIDARSCCN4A3X2YWZ37ZI",
+  "Account": "107513503799",
+  "Arn": "arn:aws:iam::107513503799:user/temp-user"
+}
+```
+
+I downloaded the log files from the discord server and unzipped them to get the following files.
+
+```terminal
+┌──(kali㉿kali)-[~/Desktop/pwnedlabs/BreachInTheCloud]
+└─$ ls    
+107513503799_CloudTrail_us-east-1_20230826T2035Z_PjmwM7E4hZ6897Aq.json  107513503799_CloudTrail_us-east-1_20230826T2100Z_APB7fBUnHmiWjHtg.json
+107513503799_CloudTrail_us-east-1_20230826T2040Z_UkDeakooXR09uCBm.json  107513503799_CloudTrail_us-east-1_20230826T2105Z_fpp78PgremAcrW5c.json
+107513503799_CloudTrail_us-east-1_20230826T2050Z_iUtQqYPskB20yZqT.json  107513503799_CloudTrail_us-east-1_20230826T2120Z_UCUhsJa0zoFY3ZO0.json
+107513503799_CloudTrail_us-east-1_20230826T2055Z_W0F5uypAbGttUgSn.json
+```
+
+Let's breakdown the file format to understand the data.
+
+```text
+107513503799_CloudTrail_us-east-1_20230826T2035Z_PjmwM7E4hZ6897Aq.json
+
+107513503799 => Account ID
+CloudTrail => Service Name
+us-east-1 => Region
+20230826T2035Z => Timestamp
+PjmwM7E4hZ6897Aq => Random Identifier
+```
