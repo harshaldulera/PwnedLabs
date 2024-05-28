@@ -105,4 +105,31 @@ The fourth file `107513503799_CloudTrail_us-east-1_20230826T2055Z_W0F5uypAbGttUg
 
 ## File 5
 
-In the third file `107513503799_CloudTrail_us-east-1_20230826T2100Z_APB7fBUnHmiWjHtg.json`
+In the fifth file `107513503799_CloudTrail_us-east-1_20230826T2100Z_APB7fBUnHmiWjHtg.json`, We can see that the `temp-user` called the `Assume Role` API to which he was able to have access to `AdminRole` role for a limited duration.
+
+## File 6
+
+In the last file `107513503799_CloudTrail_us-east-1_20230826T2120Z_UCUhsJa0zoFY3ZO0.json`, We can see that the `AdminRole` user is able to make the API calls of `ListObject` and `GetObject`.
+
+<figure><img src="../src/Breach-In-The-Cloud/5.png" alt="ListObject API Access by AdminRole user."></figure>
+
+After analyzing the log files, Let's try to retrace the steps and get access.
+
+## Retracing The Steps
+
+I configured the `aws-cli` as per the credentials given in the starting point of the lab to have access as the `temp-user`.
+
+```bash
+$ aws sts get-caller-identity | jq
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/6.png" alt="Access to temp-user in aws-cli."></figure>
+
+Now let's check what policies are attached as a temp-user.
+
+```bash
+$ aws iam list-user-policies --user-name temp-user
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/7.png" alt="Policies for the temp-user."></figure>
+
