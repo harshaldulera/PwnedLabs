@@ -57,7 +57,6 @@ On analyzing the first file `107513503799_CloudTrail_us-east-1_20230826T2035Z_Pj
         "principalId": "AIDARSCCN4A3X2YWZ37ZI",
         "arn": "arn:aws:iam::107513503799:user/temp-user",
         "accountId": "107513503799",
-        "accessKeyId": "AKIARSCCN4A3WD4RO4P4",
         "userName": "temp-user"
       },
       "eventTime": "2023-08-26T20:29:37Z",
