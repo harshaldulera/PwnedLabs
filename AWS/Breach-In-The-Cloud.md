@@ -160,3 +160,30 @@ $ aws sts get-caller-identity
 
 <figure><img src="../src/Breach-In-The-Cloud/11.png" alt="Checking role after exporting variables."></figure>
 
+We saw that there was a bucket named `emergency-data-recovery`. Let's list contents of that bucket.
+
+```bash
+$ aws s3 ls s3://emergency-data-recovery
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/12.png" alt="List contents of the s3 bucket."></figure>
+
+Copy paste the content to our local machine.
+
+```bash
+$ aws s3 cp s3://emergency-data-recovery/emergency.txt .
+
+$ aws s3 cp s3://emergency-data-recovery/message.txt .
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/13.png" alt="Copy pasting the contents of the bucket to my machine."></figure>
+
+Let's read the content of `message.txt`
+
+<figure><img src="../src/Breach-In-The-Cloud/14.png" alt="Reading the message in the text files."></figure>
+
+The flag is in the `emergency.txt` file.
+
+The Lab has been pwned!!
+
+Thank you! Happy Hacking :D
