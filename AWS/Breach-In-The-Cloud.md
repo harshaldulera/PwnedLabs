@@ -151,14 +151,6 @@ $ aws sts assume-role --role-arn arn:aws:iam::107513503799:role/AdminRole --role
 
 Exported the values as environment variables to login into the AdminRole.
 
-```bash
-$ export AWS_ACCESS_KEY_ID=
-
-$ export AWS_SECRET_ACCESS_KEY=
-
-$ export AWS_SESSION_TOKEN=
-```
-
 <figure><img src="../src/Breach-In-The-Cloud/10.png" alt="Exporting environment variables"><figure>
 
 Let's run `get-caller-identity` to check our role again.
