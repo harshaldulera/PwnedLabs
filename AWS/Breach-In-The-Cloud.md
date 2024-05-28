@@ -120,7 +120,7 @@ After analyzing the log files, Let's try to retrace the steps and get access.
 I configured the `aws-cli` as per the credentials given in the starting point of the lab to have access as the `temp-user`.
 
 ```bash
-$ aws sts get-caller-identity | jq
+$ aws sts get-caller-identity
 ```
 
 <figure><img src="../src/Breach-In-The-Cloud/6.png" alt="Access to temp-user in aws-cli."></figure>
@@ -132,4 +132,40 @@ $ aws iam list-user-policies --user-name temp-user
 ```
 
 <figure><img src="../src/Breach-In-The-Cloud/7.png" alt="Policies for the temp-user."></figure>
+
+Let's check the policy to see the actions we are able to make as a temp-user.
+
+```bash
+$ aws iam get-user-policy --user-name temp-user --policy-name test-temp-user
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/8.png" alt="Actions for the policy of temp-user"></figure>
+
+## Assuming the Role
+
+```bash
+$ aws sts assume-role --role-arn arn:aws:iam::107513503799:role/AdminRole --role-session-name hellosesssion
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/9.png" alt="Details for the assumed role created."></figure>
+
+Exported the values as environment variables to login into the AdminRole.
+
+```bash
+$ export AWS_ACCESS_KEY_ID=ASIARSCCN4A3YSY3DY4W
+
+$ export AWS_SECRET_ACCESS_KEY=geaiheCE0JaTK9c4dN6XA+DKqYqCmZ3nuXYBaMUt
+
+$ export AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEGwaCXVzLWVhc3QtMSJHMEUCID1BIohs8o/IfzGynUUP1JkklAAawmBOYTd05bhpel48AiEAz4dxMGZO33Jc2v135ihL4NGhlqqdoLsQR2DwvAKkjXIqowII5f//////////ARAAGgwxMDc1MTM1MDM3OTkiDGQagvBoSCI/smVNWir3AbJ9lec2I9irULFdGOaF8NuiHaHmH5O7ybpaQqSa8Wxj7mzMHKYb2qVF9bhBJYsPC/4AruoB2+JN7AhAJqzyUfQdUTZA4Br9Xx1uXywx1soRcXFDVlv6U5wTuyBJX74PeQF/d4tV+IDy0h0Lf0HJkmDy9A7vct5UiRVvsLnXypOfF79fYC7kRg3U3SvNIZMgw2ej67eGz2ORy+HlnLme+ZkpLoRKLI5/7arhs2kaIjQ280kyVxSBvkzpGrKTfjjO/iRTkwhRheDEFwigmtUWyzKoVnmGQvyRvSyf2PAHe8gMqvVWOIlLfVxXhUTk6JEnzCBpYeL9Rscwx6jVsgY6nQFIdFQJ11O5o8IPBHOQrV3DrW+LOO7u7QfQi5dd0K2mATUlsCwRC6Cm4UulvGJwYBhiVAs+cVDZdrVsuSQ+DPo89D63chG/r+s18ChY+KNFOml4RpcLvoK1UEP9qvtlSAU3WQYGeySGkadfdBoxovdLpFxs323CvQhWZAGIhinTmbJRl6HydqFrpyCi5CBmiVaWNjlruvgj4DuK2ejX
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/10.png" alt="Exporting environment variables"><figure>
+
+Let's run `get-caller-identity` to check our role again.
+
+```bash
+$ aws sts get-caller-identity
+```
+
+<figure><img src="../src/Breach-In-The-Cloud/11.png" alt="Checking role after exporting variables."></figure>
 
