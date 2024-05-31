@@ -50,3 +50,36 @@ $ aws iam get-policy-version --policy-arn arn:aws:iam::aws:policy/AmazonGuardDut
 ```
 
 <figure><img src="../src/Intro-to-AWS-IAM-Enumeration/7.png" alt="Version details about the GuardDuty Policy."></figure>
+
+Let's check the versions of the `dev01` policy.
+
+```sh
+$ aws iam list-policy-versions --policy-arn arn:aws:iam::794929857501:policy/dev01 | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/8.png" alt="Listing the version of dev01 policies."></figure>
+
+The latest version for the `dev01` policy is `v7` so let's get some details for the same.
+
+```sh
+$ aws iam get-policy-version --policy-arn arn:aws:iam::794929857501:policy/dev01 --version-id v7 | jq 
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/9.png" alt="Version details about dev01 latest policy."></figure>
+
+The only interesting user and policy is the `BackendDev` so let's enumerate further on it.
+
+Let's call the `get-role` API to check details about `BackendDev`.
+```sh
+$ aws iam get-role --role-name BackendDev | jq
+```
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/11.png" alt="Calling the get-role API to enumerate for BackendDev."></figure>
+
+Now, let's check the attached role policies for `BackendDev`.
+
+```sh
+$ aws iam list-attached-role-policies --role-name BackendDev | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/10.png" alt="Listing attached role policies for BackendDev."></figure>
+
