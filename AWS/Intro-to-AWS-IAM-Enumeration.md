@@ -1,4 +1,5 @@
 # Intro to AWS IAM Enumeration Writeup
+This writeup details the process of enumerating AWS IAM (Identity and Access Management) entities and their policies. The enumeration involves listing attached and inline policies, inspecting specific policy versions, and exploring roles like BackendDev. The process culminates in discovering an S3 bucket named hl-dev-artifacts and identifying a flag.txt file within, indicating successful completion of the challenge. The writeup serves as a guide for methodically uncovering and understanding IAM configurations in AWS.
 
 <hr/>
 
@@ -83,3 +84,22 @@ $ aws iam list-attached-role-policies --role-name BackendDev | jq
 
 <figure><img src="../src/Intro-to-AWS-IAM-Enumeration/10.png" alt="Listing attached role policies for BackendDev."></figure>
 
+Finally, Let's examine the inline user policy `s3_access`.
+
+```sh
+$ aws iam get-user-policy --user-name dev01 --policy-name S3_Access | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/12.png" alt="Enumerating the inline s3_access policy with regards to dev01."></figure>
+
+We can see that there is an s3 bucket present with the name `hl-dev-artifacts`. Let's list the contents of the s3 bucket.
+
+```sh
+$ aws s3 ls s3://hl-dev-artifacts
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/13.png" alt="Listing contents of the s3 bucket."></figure>
+
+We can see there is a `flag.txt` so the lab has been pwned.
+
+Thank you!! Happy Hacking :D
