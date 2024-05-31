@@ -29,3 +29,10 @@ We can list the attached policies of the user.
 $ aws iam list-attached-user-policies --user-name dev01 | jq
 ```
 <figure><img src="../src/Intro-to-AWS-IAM-Enumeration/4.png" alt="Attached user policies of dev01."></figure>
+
+Let's check the inline policies of dev01.
+```sh
+$ aws iam list-user-policies --user-name dev01 | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/5.png" alt="Inline policies of dev01."></figure>
