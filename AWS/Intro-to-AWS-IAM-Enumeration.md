@@ -36,3 +36,17 @@ $ aws iam list-user-policies --user-name dev01 | jq
 ```
 
 <figure><img src="../src/Intro-to-AWS-IAM-Enumeration/5.png" alt="Inline policies of dev01."></figure>
+
+Let's dig into policies now, Let's list the versions of the `AmazonGuardDutyReadOnlyAccess` policy.
+```sh
+$ aws iam list-policy-versions --policy-arn arn:aws:iam::aws:policy/AmazonGuardDutyReadOnlyAccess | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/6.png" alt="Listing the version of GuardDuty policy."></figure>
+
+The latest version is `v3`. Let's run a command to check the details about it.
+```sh
+$ aws iam get-policy-version --policy-arn arn:aws:iam::aws:policy/AmazonGuardDutyReadOnlyAccess --version-id v3 | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/7.png" alt="Version details about the GuardDuty Policy."></figure>
