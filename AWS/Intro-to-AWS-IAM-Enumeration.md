@@ -16,3 +16,10 @@ $ aws sts get-caller-identity | jq
 ```
 
 <figure><img src="../src/Intro-to-AWS-IAM-Enumeration/2.png" alt="Checking the user in aws-cli."></figure>
+
+Let's get more information about the user.
+```sh
+$ aws iam get-user | jq
+```
+
+<figure><img src="../src/Intro-to-AWS-IAM-Enumeration/3.png" alt="Enumerating about the IAM user."></figure>
